@@ -21,7 +21,7 @@ public class TestQueBuscaTodosLosPaisesDeHablaInglesa {
 	
 	public SessionFactory buildSessionFactory() {
 		StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().
-                configure("hibernateContext.xml").build();
+                configure("test-hibernateContext.xml").build();
 
         Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().
                 build();

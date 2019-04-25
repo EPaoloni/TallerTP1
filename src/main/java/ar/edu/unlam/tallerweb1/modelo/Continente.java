@@ -13,11 +13,11 @@ public class Continente {
 	private Long id;
 	private String nombre;
 	
-	private String getNombre() {
+	public String getNombre() {
 		return this.nombre;
 	}
 	
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 }

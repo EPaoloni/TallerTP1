@@ -18,6 +18,7 @@ public class Pais {
 	private String idioma;
 	@OneToOne
 	private Ciudad capital;
+	//TODO: Agregar cascade donde corresponda.
 	@ManyToOne
 	private Continente continente;
 	

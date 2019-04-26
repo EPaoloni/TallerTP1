@@ -14,63 +14,73 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.SessionFactoryBuilder;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+
+import static org.assertj.core.api.Assertions.*;
 
 import ar.edu.unlam.tallerweb1.modelo.Continente;
 import ar.edu.unlam.tallerweb1.modelo.Pais;
 
-public class TestTPPaises{
-	
-	public SessionFactory buildSessionFactory() {
-		StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().
-                configure("test-hibernateContext.xml").build();
-
-        Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().
-                build();
-
-        SessionFactoryBuilder sessionFactoryBuilder = metadata.getSessionFactoryBuilder();
-
-        SessionFactory sessionFactory = sessionFactoryBuilder.build();
-		
-        return sessionFactory;
-	}
+public class TestTPPaises extends SpringTest{
 	
 	@Test
+	@Transactional @Rollback(true)
 	public void testQueBuscaTodosLosPaisesDeHablaInglesa() {
 		
-		Pais pais = new Pais();
-		pais.setIdioma("Ingles");
+		Pais inglaterra = new Pais();
+		inglaterra.setIdioma("ingles");
 		
-		Session session = buildSessionFactory().getCurrentSession();
-		session.save(pais);
+		Pais usa = new Pais();
+		usa.setIdioma("ingles");
 		
-		Query q = session.createSQLQuery("SELECT * FROM Pais WHERE idioma = 'Ingles'");
-		List<Pais> paisesDeHablaInglesa = (List<Pais>)q.list();
-		for( Pais element : paisesDeHablaInglesa ) {
-			Assert.assertEquals(element.getIdioma(), "Ingles");
-		}
+		Pais argentina = new Pais();
+		argentina.setIdioma("español");
+		
+		Session session = getSession();
+		session.save(inglaterra);
+		session.save(usa);
+		session.save(argentina);
+		
+		List paisesDeHablaInglesa = session.createCriteria(Pais.class)
+				.add(Restrictions.eq("idioma", "ingles"))
+				.list();
+		
+		assertThat(paisesDeHablaInglesa).containsExactly(usa, inglaterra);
 	}
 	
 	@Test
+	@Transactional @Rollback(true)
 	public void testQueBuscaTodosLosPaisesDelContinenteEuropeo() {
 		
-		Continente continente = new Continente();
-		continente.setNombre("Europa");
+		Continente europa = new Continente();
+		europa.setNombre("Europa");
+	
+		Continente oceania = new Continente();
+		oceania.setNombre("Oceania");
 		
-		Pais pais = new Pais();
-		pais.setContinente(continente);
+		Pais inglaterra = new Pais();
+		inglaterra.setContinente(europa);
 		
-		Session session = buildSessionFactory().getCurrentSession();
-		session.save(pais);
+		Pais italia= new Pais();
+		italia.setContinente(europa);
 		
-		Query q = session.createSQLQuery("SELECT *"
-										+ "FROM Pais"
-										+ "WHERE Continente = 'Europa'");
-		List<Pais> paisesEuropeos = (List<Pais>)q.list();
-		for( Pais element : paisesEuropeos ) {
-			Assert.assertEquals(element.getContinente().getNombre(), "Europa");
-		}
+		Pais australia = new Pais();
+		australia.setContinente(oceania);
+
+		Session session = getSession();
+		session.save(inglaterra);
+		session.save(australia);
+		session.save(italia);
+		
+		List paisesEuropeos = session.createCriteria(Pais.class)
+				.add(Restrictions.eq("continente", "Europa"))
+				.list();
+		
+		assertThat(paisesEuropeos).containsExactly(inglaterra, italia);
 	}
 	
 }

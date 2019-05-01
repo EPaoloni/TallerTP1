@@ -24,6 +24,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import ar.edu.unlam.tallerweb1.modelo.Continente;
 import ar.edu.unlam.tallerweb1.modelo.Pais;
+import ar.edu.unlam.tallerweb1.modelo.Ciudad;
+import ar.edu.unlam.tallerweb1.modelo.Ubicacion;
 
 public class TestTPPaises extends SpringTest{
 	
@@ -82,5 +84,36 @@ public class TestTPPaises extends SpringTest{
 		
 		assertThat(paisesEuropeos).containsExactly(inglaterra, italia);
 	}
+	
+	@Test
+	@Transactional @Rollback(true)
+	public void testQueBuscaTodosLosPaisesCuyaCapitalEstanAlNorteDelTropicoDeCancer(){
+		Long latitudTropicoDeCancer = 23.2614;
+		
+		// Pais: Argentina.
+		// Cuidad: Buenos Aires.
+		Ubicacion ubicacionBuenosAires = new Ubicacion();
+		ubicacionBuenosAires.setLatitud(-34.61315);		
+		Cuidad buenosAires = new Cuidad();
+		buenosAires.setUbicacionGeografica( ubicacionBuenosAires );
+		Pais argentina = new Pais();
+		argentina.setCapital( buenosAires );
+
+		// Pais: Suecia.
+		// Cuidad: Stockholm.
+		Ubicacion ubicacionStockholm = new Ubicacion();
+		ubicacionStockholm.setLatitud(59.33258);
+		Ciudad stockholm = new Ciudad();
+		stockholm.setUbicacionGeografica( ubicacionStockholm );
+		Pais suecia = new Pais();
+		suecia.setCapital( stockholm );
+
+		List paisesConCapitalAlNorteDelTropicoDeCancer = session.createCriteria(Pais.class)
+														 .createAlias("capital","cap")
+														 .createAlias("capital.ubicacion", "ubic")
+														 .add(Restrictions.gt("ubic",latitudTropicoDeCancer));
+
+		assertThat(paisesConCapitalAlNorteDelTropicoDeCancer).containsExactly(suecia);
+	} 
 	
 }

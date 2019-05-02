@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class Ciudad {
 
@@ -15,6 +17,7 @@ public class Ciudad {
 	private Long id;
 	private String nombre;
 	@OneToOne
+	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Ubicacion ubicacionGeografica;
 	@ManyToOne
 	private Pais pais;

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class Pais {
 
@@ -17,9 +19,11 @@ public class Pais {
 	private Long habitantes;
 	private String idioma;
 	@OneToOne
+	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Ciudad capital;
 	//TODO: Agregar cascade donde corresponda.
 	@ManyToOne
+	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Continente continente;
 	
 	public String getNombre() {

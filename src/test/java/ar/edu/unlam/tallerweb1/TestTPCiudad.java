@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.SharedSessionContract;
 import org.hibernate.Transaction;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -25,7 +26,7 @@ import static org.assertj.core.api.Assertions.*;
 import ar.edu.unlam.tallerweb1.modelo.Ciudad;
 import ar.edu.unlam.tallerweb1.modelo.Ubicacion;
 
-public class TestTPCuidad extends SpringTest{
+public class TestTPCiudad extends SpringTest{
 	
 	@Test
 	@Transactional @Rollback(true)
@@ -34,17 +35,22 @@ public class TestTPCuidad extends SpringTest{
 		Ubicacion ubicacionBuenosAires = new Ubicacion();
 		ubicacionBuenosAires.setLatitud( -34.61315 );
 		Ciudad buenosAires = new Ciudad();
-		buenosAires.setUbicacion(ubicacionBuenosAires);
+		buenosAires.setUbicacionGeografica(ubicacionBuenosAires);
 
 		Ubicacion ubicacionStockholm = new Ubicacion();
 		ubicacionStockholm.setLatitud( 59.33258 );
 		Ciudad stockholm = new Ciudad();
-		stockholm.setUbicacion( ubicacionStockholm );
+		stockholm.setUbicacionGeografica( ubicacionStockholm );
+		
+		getSession().save(buenosAires);
+		getSession().save(stockholm);
+		
 
-		List cuidadesDelHemisferioSur = session.createCriteria(Ciudad.class)
-										.createAlias( "ubicacion", "ubic" )
-										.add(Restrictions.lt("ubic", 0.00));
+		List cuidadesDelHemisferioSur = getSession().createCriteria(Ciudad.class)
+										.createAlias( "ubicacionGeografica", "ubic" )
+										.add(Restrictions.lt("ubic.latitud", 0.00))
+										.list();
 
-		assertThat(ciudadesDelHemisferioSur).containsExactly( buenosAires );
+		assertThat(cuidadesDelHemisferioSur).containsExactly( buenosAires );
 	}
 }

@@ -20,8 +20,9 @@ public class ControllerTP {
 	public ModelAndView procesarCadena() {
 		ModelMap modelo = new ModelMap();
 		
+		String cadenaResultado;
 		
-		
+		//modelo.addAttribute("cadenaResultado", cadenaResultado);
 		
 		return new ModelAndView("cadena-resultado", modelo);
 	}

@@ -8,16 +8,7 @@
 	</head>
 	<body>
 		<div class = "container">
-			<form action="/enviar-cadena" class="col-xs-4">
-				<select class="form-control" id="operation-select">
-				  <option value="mayus">Pasar a mayúsculas</option>
-				  <option value="minus">Pasar a minúsculas</option>
-				  <option value="invert">Invertir órden</option>
-				  <option value="cant">Cantidad de caracteres</option>
-				</select>
-				<input class="form-control" id="cadena" type="text" placeholder="Cadena">
-				<input class="form-control btn btn-success" type="submit" value="Enviar">
-			</form>
+			<h2>${cadenaResultado}</h2>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

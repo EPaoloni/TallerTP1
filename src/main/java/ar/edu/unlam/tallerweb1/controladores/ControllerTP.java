@@ -13,6 +13,7 @@ public class ControllerTP {
 	
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String home() {
+
 		return "home";
 	}
 	

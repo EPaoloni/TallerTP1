@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
@@ -8,15 +9,15 @@
 	</head>
 	<body>
 		<div class = "container">
-			<form action="/enviar-cadena" class="col-xs-4">
+			<form class="col-xs-4" action="/proyecto_limpio_spring_war/enviar-cadena" method="POST">
 				<select class="form-control" id="operation-select">
-				  <option value="mayus">Pasar a mayúsculas</option>
-				  <option value="minus">Pasar a minúsculas</option>
-				  <option value="invert">Invertir órden</option>
+				  <option value="mayus">Pasar a mayÃºsculas</option>
+				  <option value="minus">Pasar a minÃºsculas</option>
+				  <option value="invert">Invertir Ã³rden</option>
 				  <option value="cant">Cantidad de caracteres</option>
 				</select>
 				<input class="form-control" id="cadena" type="text" placeholder="Cadena">
-				<input class="form-control btn btn-success" type="submit" value="Enviar">
+				<button class="form-control btn btn-success" type="submit">Enviar</button>
 			</form>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

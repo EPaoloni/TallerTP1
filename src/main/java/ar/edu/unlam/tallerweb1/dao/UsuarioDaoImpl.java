@@ -14,7 +14,7 @@ import javax.inject.Inject;
 @Repository("usuarioDao")
 public class UsuarioDaoImpl implements UsuarioDao {
 
-	// Como todo dao maneja acciones de persistencia, normalmente estará inyectado el session factory de hibernate
+	// Como tod dao maneja acciones de persistencia, normalmente estará inyectado el session factory de hibernate
 	// el mismo está difinido en el archivo hibernateContext.xml
 	@Inject
     private SessionFactory sessionFactory;

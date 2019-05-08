@@ -21,7 +21,6 @@ public class Pais {
 	@OneToOne
 	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Ciudad capital;
-	//TODO: Agregar cascade donde corresponda.
 	@ManyToOne
 	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Continente continente;

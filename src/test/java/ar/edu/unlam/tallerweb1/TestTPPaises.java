@@ -146,7 +146,8 @@ public class TestTPPaises extends SpringTest{
 		List paisesConCapitalAlNorteDelTropicoDeCancer = getSession().createCriteria(Pais.class)
 														 .createAlias("capital","cap")
 														 .createAlias("cap.ubicacionGeografica", "ubic")
-														 .add(Restrictions.gt("ubic.latitud",latitudTropicoDeCancer))
+														 .createAlias("ubic.latitud", "lat")
+														 .add(Restrictions.gt("lat", latitudTropicoDeCancer.doubleValue())
 														 .list();
 
 		assertThat(paisesConCapitalAlNorteDelTropicoDeCancer).containsExactly(suecia);

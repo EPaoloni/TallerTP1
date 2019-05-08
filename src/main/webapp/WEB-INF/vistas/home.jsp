@@ -9,14 +9,14 @@
 	</head>
 	<body>
 		<div class = "container">
-			<form class="col-xs-4" action="/proyecto_limpio_spring_war/enviar-cadena" method="POST">
-				<select class="form-control" id="operation-select">
-				  <option value="mayus">Pasar a mayúsculas</option>
-				  <option value="minus">Pasar a minúsculas</option>
-				  <option value="invert">Invertir órden</option>
+			<form class="col-xs-4" action="/proyecto-limpio-spring/enviar-cadena" method="POST">
+				<select class="form-control" id="operation-select" name="nombreOperacion">
+				  <option value="mayus">Pasar a may&uacute;sculas</option>
+				  <option value="minus">Pasar a min&uacute;sculas</option>
+				  <option value="invert">Invertir &oacute;rden</option>
 				  <option value="cant">Cantidad de caracteres</option>
 				</select>
-				<input class="form-control" id="cadena" type="text" placeholder="Cadena">
+				<input class="form-control" id="cadena" name="cadena" type="text" placeholder="Cadena">
 				<button class="form-control btn btn-success" type="submit">Enviar</button>
 			</form>
 		</div>

@@ -9,7 +9,15 @@
 	</head>
 	<body>
 		<div class = "container">
-			<h2></h2>
+			<h2>Resultado de la operaci&oacute;n:</h2>
+				<c:if test="${not empty cadenaResultado}">
+			        <h2><span>${cadenaResultado}</span></h2>
+			        <br>
+		        </c:if>	
+				<c:if test="${not empty cantidadCaracteres}">
+			        <h2><span>${cantidadCaracteres}</span></h2>
+			        <br>
+		        </c:if>	
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

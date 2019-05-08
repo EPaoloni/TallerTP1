@@ -142,12 +142,15 @@ public class TestTPPaises extends SpringTest{
 		stockholm.setUbicacionGeografica( ubicacionStockholm );
 		Pais suecia = new Pais();
 		suecia.setCapital( stockholm );
+		
+		Session session = getSession();
+		session.save(argentina);
+		session.save(suecia);
 
-		List paisesConCapitalAlNorteDelTropicoDeCancer = getSession().createCriteria(Pais.class)
+		List paisesConCapitalAlNorteDelTropicoDeCancer = session.createCriteria(Pais.class)
 														 .createAlias("capital","cap")
 														 .createAlias("cap.ubicacionGeografica", "ubic")
-														 .createAlias("ubic.latitud", "lat")
-														 .add(Restrictions.gt("lat", latitudTropicoDeCancer.doubleValue())
+														 .add(Restrictions.gt("ubic.latitud", latitudTropicoDeCancer))
 														 .list();
 
 		assertThat(paisesConCapitalAlNorteDelTropicoDeCancer).containsExactly(suecia);

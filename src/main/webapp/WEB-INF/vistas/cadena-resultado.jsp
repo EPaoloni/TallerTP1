@@ -10,8 +10,8 @@
 	<body>
 		<div class = "container">
 			<h2>Resultado de la operaci&oacute;n:</h2>
-				<c:if test="${not empty cadenaResultado}">
-			        <h2><span>${cadenaResultado}</span></h2>
+				<c:if test="${not empty resultado}">
+			        <h2><span>${resultado}</span></h2>
 			        <br>
 		        </c:if>	
 				<c:if test="${not empty cantidadCaracteres}">

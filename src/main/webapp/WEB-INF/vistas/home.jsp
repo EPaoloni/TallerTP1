@@ -11,10 +11,10 @@
 		<div class = "container">
 			<form class="col-xs-4" action="/proyecto-limpio-spring/enviar-cadena" method="POST">
 				<select class="form-control" id="operation-select" name="nombreOperacion">
-				  <option value="mayus">Pasar a may&uacute;sculas</option>
-				  <option value="minus">Pasar a min&uacute;sculas</option>
-				  <option value="invert">Invertir &oacute;rden</option>
-				  <option value="cant">Cantidad de caracteres</option>
+				  <option value="pasarAMayuscula">Pasar a may&uacute;sculas</option>
+				  <option value="pasarAMinuscula">Pasar a min&uacute;sculas</option>
+				  <option value="invertirOrden">Invertir &oacute;rden</option>
+				  <option value="cantidadDeCaracteres">Cantidad de caracteres</option>
 				</select>
 				<input class="form-control" id="cadena" name="cadena" type="text" placeholder="Cadena">
 				<button class="form-control btn btn-success" type="submit">Enviar</button>

@@ -17,17 +17,17 @@ public class ServicioTP {
 		Map<String, Object> mapResultado = new HashMap<>();
 		
 		switch(operacion) {
-		case "mayus":
+		case "pasarAMayuscula":
 			cadenaResultado = cadena.toUpperCase();
 			mapResultado.put(resultado, cadenaResultado);
 			break;
 			
-		case "minus":
+		case "pasarAMinuscula":
 			cadenaResultado = cadena.toLowerCase();
 			mapResultado.put(resultado, cadenaResultado);
 			break;
 			
-		case "invert":
+		case "invertirOrden":
 			StringBuilder bld = new StringBuilder();
 			for(int i = cadena.length() - 1; i >= 0; i--)
 	        {
@@ -37,7 +37,7 @@ public class ServicioTP {
 			mapResultado.put(resultado, cadenaResultado);
 			break;
 			
-		case "cant":
+		case "cantidadDeCaracteres":
 			cantidadCaracteres = cadena.length();
 			mapResultado.put(resultado, cantidadCaracteres);
 			break;
